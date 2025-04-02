@@ -36,7 +36,7 @@ resource "aws_iam_role" "iam_role" {
 
 resource "aws_iam_policy" "iam_policy" {
   name        = "my-iam-policy"
-  description = "IAM policy for EC2 and CloudFront access to S3"
+  description = "IAM policy for EC2 to access to S3"
   policy = jsonencode({
       Version = "2012-10-17",
       Statement = [{
