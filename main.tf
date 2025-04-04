@@ -4,7 +4,7 @@ provider "aws" {
 
 
 module "aws_vpc_module" {
-    source = "./modules/aws_vpc_module"
+    source = "./aws_vpc_module"
     vpc_cidr = var.vpc_cidr
     vpc_name = var.vpc_name
     subnet1_cidr = var.subnet1_cidr
@@ -24,7 +24,7 @@ module "aws_vpc_module" {
 }
 
 module "aws_lb_module" {
-    source = "./modules/aws_lb_module"
+    source = "./aws_lb_module"
     vpc_id_to_use_for_other_modules = module.aws_vpc_module.vpc_id_to_use_for_other_modules
     alb_sg_name = var.alb_sg_name
     my_load_balancer_type = var.my_load_balancer_type
@@ -36,7 +36,7 @@ module "aws_lb_module" {
 }
 
 module "aws_autoscaling_group" {
-    source = "./modules/aws_auto_scaling_group_module"
+    source = "./aws_auto_scaling_group_module"
     vpc_id_to_use_for_other_modules = module.aws_vpc_module.vpc_id_to_use_for_other_modules
     my_sg_name = var.my_sg_name
     my_asg_name = var.my_asg_name
@@ -53,7 +53,7 @@ module "aws_autoscaling_group" {
 }
 
 module "aws_Iam_Ec2_s3_module" {
-    source = "./modules/aws_Iam_Ec2_s3_module"
+    source = "./aws_Iam_Ec2_s3_module"
     bucket_name      = var.bucket_name
     my_iam_role      = var.my_iam_role
     my_ami           = var.my_ami
@@ -64,7 +64,7 @@ module "aws_Iam_Ec2_s3_module" {
 }
 
 module "aws_cloudfront_module" {
-    source = "./modules/aws_cloudfront_module"
+    source = "./aws_cloudfront_module"
     bucket_name = module.aws_Iam_Ec2_s3_module.bucket_name
     domain_name = module.aws_Iam_Ec2_s3_module.bucket_regional_domain_name
 }
